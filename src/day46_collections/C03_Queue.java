@@ -37,7 +37,33 @@ public class C03_Queue {
         //Eger sayilarda kapasite sinirlamasina uygunsa verilen sayiyi ekler
         //add() den farki : add() direk ekler, offer() eklemeyi teklif eder ,kapas,te uygunsa ekler.
 
-        System.out.println(numbers);
+        System.out.println(numbers);//[9,2,5,7,10]
+
+        System.out.println(numbers.poll());//9
+        //Retrieves and removes the head of this queue, or returns null if this queue is empty
+        //queue nun basindaki elementi siler ve bize dondururi eger queue bossa null dondurur
+
+        System.out.println(numbers);//[2,5,7,10]
+
+
+        Queue<Integer> bosQueue = new LinkedList<>();
+        System.out.println(bosQueue.poll());// null
+
+
+        System.out.println(numbers.element());//2
+        //Retrieves, but does not remove, the head of this queue.
+        // This method differs from peek only in that it throws an exception if this queue is empty.
+        // Queue nun ilk elementini silmeden bize getirir
+        //bos bir Queue da calistirilirsa ezception firlatir
+        System.out.println(numbers);//[2,5,7,10]
+
+        //System.out.println(bosQueue.element());//NoSuchElementException
+
+        System.out.println(numbers.peek()); // 2
+        //Retrieves, but does not remove, the head of this queue, or returns null if this queue is empty.
+        // queue'nun ilk elementini silmeden bize getirir bos bir queue da calistirilirsa null getirir
+
+        System.out.println(bosQueue.peek());
 
 
 
