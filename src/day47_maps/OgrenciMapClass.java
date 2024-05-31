@@ -153,4 +153,114 @@ public class OgrenciMapClass {
         }
 
     }
+
+    public static void numaraIleSoyisimUpdate(int ogrenciNo, String yeniSoyisim) {
+
+
+        //verilen numarali ogrencinin soyisimini verilen soyisim olarak update edin
+        //ornek : 103 numarali ogrencinin soyisimini Yilmaz yapalim
+
+        //1- numarasi verilen ogrencinin eski value sini kaydedelim
+
+        String eskiValue = ogrenciMap.get(ogrenciNo);
+
+        //2- bilgilere ulasabilmek icin split yapalim
+
+        String[] valueArr = eskiValue.split("-");
+
+        //3-valueArr inde istenen update i yapabiliriz
+        valueArr[1] = yeniSoyisim;
+
+        //Update islemlerinde array de update yaptiktan sonra
+        //yapilan update i map e kaydetmeliyiz
+
+        //4- ValueArr indeki bilgileri tekrar value formatinda String yapalim
+        String yeniValue = String.join("-", valueArr);
+
+        //5- key ve yeni valeu ile map i update edelim
+        ogrenciMap.put(ogrenciNo, yeniValue);
+    }
+
+    public static void bolumDegistir(String eskiBolum, String yeniBolum) {
+
+        //istenen bolumdeki tum ogrencilerin
+        //bolum isimlerini yeni verilen bolum ismi olarak degistirin
+        //Ornek : MF bolumundeki tum ogrencilerin bolumunu SAY yapalim
+
+        //Butun ogrencileri gozden gecirmemiz gerekiyor
+        //keySet i alip oaradaki her bir keyi analiz etmemiz gerekir
+
+        Set<Integer> keySeti = ogrenciMap.keySet();
+
+        for (Integer eachKey : keySeti) { //bu loop tek tek tum keyleri bize getirir
+
+            //1- eachKey 'in getirdigi keydeki  eski value yu kaydedelim(ornegin : eachKey =103)
+            String eskiValue = ogrenciMap.get(eachKey);
+
+            //2- Biilgilere erisim icin split edelim
+            String[] valueArr = eskiValue.split("-");
+
+            //3- array de bolumu kontrol edip
+            //degistirilmesi istenen eski bolumu ismi ised
+            //yeni bolum ismi olarak update edelim
+
+            if (valueArr[4].equalsIgnoreCase(eskiBolum)) {
+                valueArr[4] = yeniBolum;
+
+                //4- update i arr de yaptik map i update edebilmel icin yeniValue u kaydedelim
+                String yeniValue = String.join("-", valueArr);
+
+
+                //5-yeniValue ile map i update edelim
+                ogrenciMap.put(eachKey, yeniValue);
+            }
+
+
+        }
+    }
+
+    public static void sinifArtir() {
+
+        // okuldaki tum ogrencileri bir ust sinifa gecirin
+        //12.siniftaki ogrencileri mezun edin
+        //mezun ögrencilere bir sey yapmayin
+
+        Set<Integer> keySeti = ogrenciMap.keySet();
+
+        for (Integer eachKey : keySeti) {
+            // 1- eachKey in getidigi keydeki eski value u kaydedelim
+            String eskiValue = ogrenciMap.get(eachKey);
+
+            //2-bilgilere erisim icin split edelim
+            String[] valueArr = eskiValue.split("-");
+
+            //tum ogrencilerin sinif bilgilerini gozden gecirelim
+            //gerekli degisikleri yapalim
+
+            String eskiSinif = valueArr[2];
+            switch (eskiSinif) {
+                case "9":
+                    valueArr[2] = "10";
+                    break;
+                case "10":
+                    valueArr[2] = "11";
+                    break;
+                case "11":
+                    valueArr[2] = "12";
+                    break;
+                case "12":
+                    valueArr[2] = "Mezun";
+                    break;
+
+            }
+
+            //4- update i arr de yaptik map i update edebilmel icin yeniValue u kaydedelim
+            String yeniValue = String.join("-", valueArr);
+
+
+            //5-yeniValue ile map i update edelim
+            ogrenciMap.put(eachKey, yeniValue);
+
+        }
+    }
 }
