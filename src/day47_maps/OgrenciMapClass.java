@@ -73,4 +73,84 @@ public class OgrenciMapClass {
             }
         }
     }
+
+    public static void isimVeSoyisimleOgrenciBulma(String isim, String soyisim) {
+
+        Set<Integer> ogrenciKey = ogrenciMap.keySet();
+
+        for (Integer eachKey : ogrenciKey) {
+
+            String istenenOgrenciValue = ogrenciMap.get(eachKey);
+
+            String[] ogrenciValueArr = istenenOgrenciValue.split("-");
+
+            if (ogrenciValueArr[0].equalsIgnoreCase(isim) && ogrenciValueArr[1].equalsIgnoreCase(soyisim)) {
+                System.out.println(eachKey + " " + ogrenciValueArr[2] + "/" + ogrenciValueArr[3]);
+            }
+
+
+        }
+    }
+
+    public static void numaraAraligindakiOgrenciBilgileriniYazdir(int minNo, int maxNo) {
+         /*
+         1- Ogrenci numarasi olarak verilen min ve max (sinirlar dahil) numaralar
+           arasindaki tum ogrencilerin numara, isim, soyisim, sinif ve subelerini yazdirin
+         */
+
+        Set<Integer> keySeti = ogrenciMap.keySet();//[101,102,......107]
+
+        //verilen numara araligindaki ogrenciNo lari bulmak icin
+        //for-each loop ile tum numaralari gözden gecirip aralikta mi diye kontrol ederiz
+
+        for (Integer eachKey : keySeti) {
+            if (eachKey >= minNo && eachKey <= maxNo) {
+                //eger bir key icin burasi calisiyorsa
+                //eachKey istenen aralikta demektir
+
+                //1-Bu keye ait value kaydedelim
+                String ogrenciValue = ogrenciMap.get(eachKey);
+
+                //2-Value Split edip bilgilere direk ulacabilecek hale getirelim
+                String[] ogrenciValueArr = ogrenciValue.split("-");
+
+                //3-Artik istenen bilgileri yazdirabiliriz
+
+                System.out.println(eachKey + " " + ogrenciValueArr[0] + " " + ogrenciValueArr[1]
+                        + " " + ogrenciValueArr[2] + " " + ogrenciValueArr[3]);
+
+            }
+        }
+    }
+
+    public static void bolumdekiOgrencilerinListesiniYazdir(String bolum) {
+        /*
+         2- verilen bolumdeki tum ogrencilerin
+           isim soyisim sinif ve subelerini yazdirin
+         */
+
+        //once tum ogrencilere ulasabilmek icin keySetini alip kaydedelim
+        Set<Integer> keySeti = ogrenciMap.keySet();
+
+
+        //keyleri kullanarak tum ograncileri elden gecirmek icin for each loop kullanalim
+
+        boolean bolumdeOgrenciYok = true;
+        for (Integer eachKey : keySeti) {
+
+            String ogrenciValue = ogrenciMap.get(eachKey);
+
+            String[] ogrenciValueArr = ogrenciValue.split("-");
+
+            if (ogrenciValueArr[4].equalsIgnoreCase(bolum)) {
+                System.out.println(ogrenciValueArr[0] + " " + ogrenciValueArr[1] + " " + ogrenciValueArr[2] + " " + ogrenciValueArr[3]);
+                //istenen bolumde ogrenci oldugundan flagi degistirdim
+                bolumdeOgrenciYok = false;
+            }
+        }
+        if (bolumdeOgrenciYok) {
+            System.out.println("Girdiginiz Bolum Hatali");
+        }
+
+    }
 }
