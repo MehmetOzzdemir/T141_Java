@@ -1,12 +1,11 @@
 package day47_maps;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.SortedMap;
+import java.util.*;
 
 public class OgrenciMapClass {
+    static Scanner scan = new Scanner(System.in);
     protected static Map<Integer, String> ogrenciMap = new HashMap<>();
+
 
     public static void mapeOgrenciEkle() {
         ogrenciMap.put(101, "Ali-Can-11-H-MF");
@@ -254,12 +253,38 @@ public class OgrenciMapClass {
 
             }
 
-            //4- update i arr de yaptik map i update edebilmel icin yeniValue u kaydedelim
+            //4- update i arr de yaptik map i update edebilmek icin yeniValue u kaydedelim
             String yeniValue = String.join("-", valueArr);
 
 
             //5-yeniValue ile map i update edelim
             ogrenciMap.put(eachKey, yeniValue);
+
+        }
+    }
+
+    public static void ogrenciEkle(int yeniOgrenciNo) {
+        //oncelikle bir if ile varilen numarayi kontrol edip,
+        //var olan bir numara ise uyari yazdirin
+
+        if (ogrenciMap.containsKey(yeniOgrenciNo)) {
+            System.out.println("Verilen Numara Zaten Kayitli");
+        } else {
+            String eskiValue = ogrenciMap.get(101);
+            String []valueArr = eskiValue.split("-");
+            ogrenciMap.get(yeniOgrenciNo);
+            System.out.println("Lütfen sira ile isim ,soyisim, Sinif,Şube,Bölüm bilgilerini Giriniz");
+            String[] yeniValueArr = new String[valueArr.length];
+
+
+            for (int i = 0; i < valueArr.length; i++) {
+                yeniValueArr[i] = scan.nextLine();
+            }
+
+            String yeniValue = String.join("-",yeniValueArr);
+            ogrenciMap.put(yeniOgrenciNo,yeniValue);
+
+
 
         }
     }
